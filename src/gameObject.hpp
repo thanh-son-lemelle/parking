@@ -1,0 +1,25 @@
+#ifndef GAMEOBJECT_HPP
+#define GAMEOBJECT_HPP
+
+#include <SFML/Graphics.hpp>
+
+// Classe abstraite GameObject représentant un élément affiché à l'écran
+class GameObject {
+public:
+    // Constructeur de la classe GameObject
+    GameObject(float x, float y, float width, float height)
+        : x(x), y(y), width(width), height(height) {}
+
+    // Destructeur virtuel pour permettre la suppression correcte des objets dérivés
+    virtual ~GameObject() {}
+
+    // Méthodes virtuelles pures
+    virtual void draw(sf::RenderWindow& window) = 0; // Méthode pour dessiner l'objet
+    virtual void update(float deltaTime) = 0;       // Méthode pour mettre à jour l'objet
+
+protected:
+    float x, y;       // Coordonnées de l'objet
+    float width, height; // Taille de l'objet
+};
+
+#endif // GAMEOBJECT_HPP
