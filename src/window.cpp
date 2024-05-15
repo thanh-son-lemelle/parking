@@ -88,14 +88,32 @@ Window::Window(const std::string& title, int width, int height)
     int startY = (height - gridRows * cellSize) / 2;
 
     grid = new Grid(gridRows, gridCols, cellSize, startX, startY);
+    initGameObjects();
 }
 
 // Destructeur de la classe Window
 Window::~Window() {
     delete grid;
+    for (auto obj : gameObjects) {
+        delete obj;
+    }
+}
+// Méthode pour initialiser les objets
+void Window::initGameObjects() {
+    // Créer un joueur
+    Vehicule* player = new Vehicule(100, 100, 100, 200, true);
+    gameObjects.push_back(player);
+
+    // Créer des ennemis
+    for (int i = 0; i < 6; i++) {
+        Vehicule* enemy = new Vehicule(i, 5, 1, 1, false);
+        gameObjects.push_back(enemy);
+    }
 }
 // Méthode principale pour exécuter la boucle de la fenêtre
 void Window::run() {
+    sf::Clock clock; // Création d'une horloge pour mesurer le temps
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -103,11 +121,21 @@ void Window::run() {
                 window.close();
         }
 
+        float deltaTime = clock.restart().asSeconds(); // Mesure du temps écoulé
+
+        // Mise à jour des objets
+        for (auto obj : gameObjects) {
+            obj->update(deltaTime); // Mise à jour de chaque objet
+        }
+
         window.clear(sf::Color::Black);
 
         // Dessiner ici
 
         grid->draw(window);
+        for (auto obj : gameObjects) {
+            obj->draw(window);
+        }
 
         window.display();
     }

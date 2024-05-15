@@ -14,7 +14,6 @@ add_executable(CMakeSFMLProject
     src/main.cpp
     src/window.cpp
     src/gameLogic.cpp
-    src/gameObject.cpp
     src/grid.cpp
     src/vehicule.cpp
 )

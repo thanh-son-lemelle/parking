@@ -3,7 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <vector>
+
 #include "grid.hpp"
+#include "vehicule.hpp"
 
 // Classe Window pour gérer la fenêtre SFML
 class Window {
@@ -20,6 +23,11 @@ public:
 private:
     sf::RenderWindow window; // Objet fenêtre de SFML
     Grid* grid;              // Pointeur vers un objet Grid
+    std::vector<GameObject*> gameObjects ; // Vecteur de pointeurs vers des objets Vehicule
+
+    // Méthode pour initialiser les objets
+
+    void initGameObjects();
 };
 
 #endif // WINDOW_HPP
