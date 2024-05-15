@@ -110,16 +110,29 @@ void Window::initGameObjects() {
         gameObjects.push_back(enemy);
     }
 }
+// Méthode pour gérer les événements
+void Window::processEvents() {
+    sf::Event event;
+    while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed){
+            window.close();
+        }
+
+        for (auto obj : gameObjects) {
+            auto vehicule = dynamic_cast<Vehicule*>(obj);
+            if (vehicule){
+                vehicule->handleInput(event);
+            }
+        }
+    }
+}
+
 // Méthode principale pour exécuter la boucle de la fenêtre
 void Window::run() {
     sf::Clock clock; // Création d'une horloge pour mesurer le temps
 
     while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        processEvents(); // Gestion des événements
 
         float deltaTime = clock.restart().asSeconds(); // Mesure du temps écoulé
 

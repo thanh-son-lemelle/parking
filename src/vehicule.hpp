@@ -71,11 +71,11 @@ public:
 
     // Méthode pour gerer les inputs du joueur
 
-    void handleInput();
+    void handleInput(const sf::Event& event);
 
 private:
     bool isPlayer; // Booléen pour savoir si l'objet est le joueur
-    float speed = 100; // Vitesse de déplacement
+    float speed; // Vitesse de déplacement
     sf::RectangleShape shape; // Forme de l'objet
 };
 
