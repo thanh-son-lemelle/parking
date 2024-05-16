@@ -25,6 +25,24 @@ public:
                  y + height <= other.y || other.y + other.height <= y);
     }
 
+
+    // Méthode pour résoudre les collisions
+    void resolveCollision(GameObject& other) {
+        float overlapLeft = (x+width) - other.x;
+        float overlapRight = (other.x + other.width) - x;
+        float overlapTop = (y + height) - other.y;
+        float overlapBottom = (other.y + other.height) - y;
+
+        if (overlapLeft < overlapRight && overlapLeft < overlapTop && overlapLeft < overlapBottom) {
+            x -= overlapLeft;
+        } else if (overlapRight < overlapLeft && overlapRight < overlapTop && overlapRight < overlapBottom) {
+            x += overlapRight;
+        } else if (overlapTop < overlapBottom && overlapTop < overlapLeft && overlapTop < overlapRight) {
+            y -= overlapTop;
+        } else {
+            y += overlapBottom;
+        }
+    }
 protected:
     float x, y;       // Coordonnées de l'objet
     float width, height; // Taille de l'objet
