@@ -24,25 +24,26 @@ void Vehicule::draw(sf::RenderWindow& window) {
 
 void Vehicule::handleInput(const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Up) {
-                std::cout << "Up key pressed" << std::endl;
-                // Déplace le personnage vers le haut une seule fois
-                y-= 100;
-            } else if (event.key.code == sf::Keyboard::Down) {
-                // Déplace le personnage vers le bas une seule fois
-                y+= 100;
-            } else if (event.key.code == sf::Keyboard::Left) {
-                // Déplace le personnage vers la gauche une seule fois
-                x-= 100;
-            } else if (event.key.code == sf::Keyboard::Right) {
-                // Déplace le personnage vers la droite une seule fois
-                x+= 100;
-            }
+        savePosition(); // Sauvegarde la position précédente
+        if (event.key.code == sf::Keyboard::Up) {
+            std::cout << "Up key pressed" << std::endl;
+            // Déplace le personnage vers le haut une seule fois
+            y-= 100;
+        } else if (event.key.code == sf::Keyboard::Down) {
+            // Déplace le personnage vers le bas une seule fois
+            y+= 100;
+        } else if (event.key.code == sf::Keyboard::Left) {
+            // Déplace le personnage vers la gauche une seule fois
+            x-= 100;
+        } else if (event.key.code == sf::Keyboard::Right) {
+            // Déplace le personnage vers la droite une seule fois
+            x+= 100;
+        }
         
         x = std::max(100.0f, std::min(x, 700.0f - width)); // Limite les déplacements horizontaux
         y = std::max(0.0f, std::min(y, 600.0f - height)); // Limite les déplacements verticaux
-        shape.setPosition(x, y); // Met à jour la position de la forme
-        std::cout << "x: " << x << ", y: " << y << std::endl; // Affiche les coordonnées
+        std::cout << "x: " << x << ", y: " << y << ", prevX : "<< prevX << ", prevY : " << prevY << std::endl; // Affiche les coordonnées
+        
     }
 }
 
@@ -54,4 +55,5 @@ bool Vehicule::contains(float mouseX, float mouseY) const {
 
 
 void Vehicule::update(float deltaTime) {
+    shape.setPosition(x, y); // Met à jour la position de la forme
 }
