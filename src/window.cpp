@@ -79,8 +79,8 @@ private:
 
 // Constructeur de la classe Window
 Window::Window(const std::string& title, int width, int height)
-    : window(sf::VideoMode(width, height), title) {
-    // calculer pour centrer la grille
+    : window(sf::VideoMode(width, height), title), selectedObject(nullptr) {
+    // calcule pour centrer la grille
     int gridRows = 6;
     int gridCols = 6;
     int cellSize = 100;
@@ -88,7 +88,8 @@ Window::Window(const std::string& title, int width, int height)
     int startY = (height - gridRows * cellSize) / 2;
 
     grid = new Grid(gridRows, gridCols, cellSize, startX, startY);
-    board = new GameLogic(std::string("../../levels/level1.txt"));
+    // board = new GameLogic(std::string("../../levels/level1.txt"));
+    initGameObjects();
 }
 
 // Destructeur de la classe Window
@@ -100,27 +101,48 @@ Window::~Window() {
 }
 // Méthode pour initialiser les objets
 void Window::initGameObjects() {
-    // Créer un joueur
-    // Orientation orientation = HORIZONTAL;
-    // Vehicle* player = new Vehicle(1, 5, 2, 1,'X', orientation , true);
-    // gameObjects.push_back(player);
+    Orientation orientation1 = HORIZONTAL;
+    Orientation orientation2 = VERTICAL;
+    // Créer un player
+    Vehicle* player = new Vehicle(1, 1, 1, 2,'X',HORIZONTAL, true);
+    gameObjects.push_back(player);
 
-    // Créer des ennemis
-    // for (int i = 0; i < 6; i++) {
-    //     Vehicle* enemy = new Vehicle(i, 5, 1, 1,'B', orientation, false);
-    //     gameObjects.push_back(enemy);
-    // }
+    // Créer un enemy
+        Vehicle* enemy = new Vehicle(4, 4, 1, 2,'A',VERTICAL, false);
+        gameObjects.push_back(enemy);
 }
+// Méthode pour gérer les événements
+void Window::processEvents() {
+    sf::Event event;
+    while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed){
+            window.close();
+        }else if (event.type == sf::Event::MouseButtonPressed){
+            if (event.mouseButton.button == sf::Mouse::Left){
+                float mouseX =  static_cast<float>(event.mouseButton.x);
+                float mouseY =  static_cast<float>(event.mouseButton.y);
+                selectedObject = nullptr;
+
+                for (auto obj : gameObjects) {
+                    auto vehicule = dynamic_cast<Vehicle*>(obj);
+                    if (vehicule && vehicule->contains(mouseX, mouseY)){
+                        selectedObject = vehicule;
+                        break;
+                    }
+                }
+            }
+        }else if (selectedObject){
+            selectedObject->handleInput(event);
+        }
+    }
+}
+
 // Méthode principale pour exécuter la boucle de la fenêtre
 void Window::run() {
     sf::Clock clock; // Création d'une horloge pour mesurer le temps
 
     while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        processEvents(); // Gestion des événements
 
         float deltaTime = clock.restart().asSeconds(); // Mesure du temps écoulé
 
@@ -134,7 +156,7 @@ void Window::run() {
         // Dessiner ici
 
         grid->draw(window);
-        board->draw(window);
+        // board->draw(window);
 
         window.display();
     }

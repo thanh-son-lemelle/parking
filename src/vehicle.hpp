@@ -74,15 +74,19 @@ public:
     void update(float deltaTime) override;
 
     // Méthode pour gerer les inputs du joueur
-    void handleInput();
+
+    void handleInput(const sf::Event& event);
+
+    // Méthode pour vérifier si le click de la souris est à l'intérieur de l'objet
+
+    bool contains(float mouseX, float mouseY) const;
 
     char id;
-    int lenght;
     Orientation orientation;
 
 private:
     bool isPlayer; // Booléen pour savoir si l'objet est le joueur
-    float speed = 100; // Vitesse de déplacement
+    float speed; // Vitesse de déplacement
     sf::RectangleShape shape; // Forme de l'objet
 };
 
