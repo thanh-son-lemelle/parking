@@ -1,5 +1,5 @@
-#ifndef VECHICULE_HPP
-#define VECHICULE_HPP
+#ifndef VEHICLE_HPP
+#define VEHICLE_HPP
 
 #include <iostream>
 #include "gameObject.hpp"
@@ -56,22 +56,29 @@ class Vehicule : public GameObject { // Hérite de GameObject
 
 #endif // VECHICULE_HPP
 */
+enum Orientation
+{
+    HORIZONTAL,
+    VERTICAL
+};
 
-class Vehicule : public GameObject { // Hérite de GameObject
+class Vehicle : public GameObject { // Hérite de GameObject
 public:
     // Constructeur de la classe Vehicule
-    Vehicule(float x, float y, float width, float height, bool isPlayer = false);
-
+    Vehicle(float x, float y, float width, float height, char id, Orientation orientation, bool isPlayer = false);
+    Vehicle();
     // Méthode pour dessiner l'objet
     void draw(sf::RenderWindow& window) override;
 
     // Méthode pour mettre à jour l'objet
-
     void update(float deltaTime) override;
 
     // Méthode pour gerer les inputs du joueur
-
     void handleInput();
+
+    char id;
+    int lenght;
+    Orientation orientation;
 
 private:
     bool isPlayer; // Booléen pour savoir si l'objet est le joueur

@@ -1,9 +1,13 @@
-#include "vehicule.hpp"
+#include "vehicle.hpp"
 #include <SFML/Window/Keyboard.hpp>
 
 // Constructeur de la classe Vehicule
-Vehicule::Vehicule(float x, float y, float width, float height, bool isPlayer)
-    : GameObject(x, y, width, height), isPlayer(isPlayer), shape(sf::Vector2f(width, height)) {
+Vehicle::Vehicle()
+    : GameObject(0, 0, 0, 0), isPlayer(false), shape(sf::Vector2f(0, 0)) {}
+
+Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientation orientation, bool isPlayer)
+    : GameObject(x * 100, y * 100, width * 100, height * 100), isPlayer(isPlayer), id(id), lenght(width), orientation(orientation), shape(sf::Vector2f(width * 100, height * 100))
+{
     shape.setPosition(x, y); // Définit la position de la forme
     if (isPlayer) {
         shape.setFillColor(sf::Color::Green); // Définit la couleur de la forme
@@ -15,13 +19,13 @@ Vehicule::Vehicule(float x, float y, float width, float height, bool isPlayer)
 
 // Méthode pour dessiner l'objet
 
-void Vehicule::draw(sf::RenderWindow& window) {
-    window.draw(shape); // Dessine la forme
+void Vehicle::draw(sf::RenderWindow& window) {
+    window.draw(this->shape); // Dessine la forme
 }
 
 // Méthode pour gerer les entrées du clavier
 
-void Vehicule::handleInput() {
+void Vehicle::handleInput() {
     if (isPlayer) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
                 x -= speed; // Déplace le joueur vers la gauche
@@ -47,6 +51,6 @@ void Vehicule::handleInput() {
     }
 }
 
-void Vehicule::update(float deltaTime) {
+void Vehicle::update(float deltaTime) {
         handleInput(); // Gère les entrées du clavier
     }

@@ -88,7 +88,7 @@ Window::Window(const std::string& title, int width, int height)
     int startY = (height - gridRows * cellSize) / 2;
 
     grid = new Grid(gridRows, gridCols, cellSize, startX, startY);
-    initGameObjects();
+    board = new GameLogic(std::string("../../levels/level1.txt"));
 }
 
 // Destructeur de la classe Window
@@ -101,14 +101,15 @@ Window::~Window() {
 // Méthode pour initialiser les objets
 void Window::initGameObjects() {
     // Créer un joueur
-    Vehicule* player = new Vehicule(100, 100, 100, 200, true);
-    gameObjects.push_back(player);
+    // Orientation orientation = HORIZONTAL;
+    // Vehicle* player = new Vehicle(1, 5, 2, 1,'X', orientation , true);
+    // gameObjects.push_back(player);
 
     // Créer des ennemis
-    for (int i = 0; i < 6; i++) {
-        Vehicule* enemy = new Vehicule(i, 5, 1, 1, false);
-        gameObjects.push_back(enemy);
-    }
+    // for (int i = 0; i < 6; i++) {
+    //     Vehicle* enemy = new Vehicle(i, 5, 1, 1,'B', orientation, false);
+    //     gameObjects.push_back(enemy);
+    // }
 }
 // Méthode principale pour exécuter la boucle de la fenêtre
 void Window::run() {
@@ -133,9 +134,7 @@ void Window::run() {
         // Dessiner ici
 
         grid->draw(window);
-        for (auto obj : gameObjects) {
-            obj->draw(window);
-        }
+        board->draw(window);
 
         window.display();
     }

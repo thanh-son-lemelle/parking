@@ -6,7 +6,8 @@
 #include <vector>
 
 #include "grid.hpp"
-#include "vehicule.hpp"
+#include "vehicle.hpp"
+#include "gameLogic.hpp"
 
 // Classe Window pour gérer la fenêtre SFML
 class Window {
@@ -26,7 +27,7 @@ private:
     std::vector<GameObject*> gameObjects ; // Vecteur de pointeurs vers des objets Vehicule
 
     // Méthode pour initialiser les objets
-
+    GameLogic* board;
     void initGameObjects();
 };
 
