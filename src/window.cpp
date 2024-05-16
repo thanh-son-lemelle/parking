@@ -101,7 +101,7 @@ Window::~Window() {
 // Méthode pour initialiser les objets
 void Window::initGameObjects() {
     // Créer un player
-    Vehicule* player = new Vehicule(100, 100, 100, 200, true);
+    Vehicule* player = new Vehicule(100, 100, 200, 100, true);
     gameObjects.push_back(player);
 
     // Créer un enemy
@@ -141,8 +141,10 @@ void Window::handleCollisions() {
             if (gameObjects[i]->intersects(*gameObjects[j])){
                 //todo: gestion de la collision entre gameobjects[i] et gameobjects[j]
                 //todo: empecher les objets de se superposer
-                gameObjects[i]->resolveCollision(*gameObjects[j]);
-                gameObjects[j]->resolveCollision(*gameObjects[i]);
+                gameObjects[i]->resolveCollision();
+                gameObjects[j]->resolveCollision();
+
+                std:: cout << " position de gameobject : " << gameObjects[i] << std::endl;
                 //todo: ajuste la position des objets pour éviter la collision
                 std::cout << "Collision detected!" << std::endl;
             }
@@ -155,16 +157,16 @@ void Window::run() {
     sf::Clock clock; // Création d'une horloge pour mesurer le temps
 
     while (window.isOpen()) {
+        handleCollisions(); // Gestion des collisions
         processEvents(); // Gestion des événements
 
         float deltaTime = clock.restart().asSeconds(); // Mesure du temps écoulé
+
 
         // Mise à jour des objets
         for (auto obj : gameObjects) {
             obj->update(deltaTime); // Mise à jour de chaque objet
         }
-
-        handleCollisions(); // Gestion des collisions
 
         window.clear(sf::Color::Black);
 
