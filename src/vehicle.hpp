@@ -5,10 +5,10 @@
 #include "gameObject.hpp"
 
 /*
-class Vehicule : public GameObject { // Hérite de GameObject
+class Vehicle : public GameObject { // Hérite de GameObject
 
     public:
-        Vehicule(float x, float y, float width, float height, bool isPlayer = false)
+        Vehicle(float x, float y, float width, float height, bool isPlayer = false)
             : GameObject(x, y, width, height), isPlayer(isPlayer), shape(sf::Vector2f(width, height)) {
             shape.setPosition(x, y); // Définit la position de la forme
             if (isPlayer) {

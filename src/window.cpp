@@ -143,11 +143,30 @@ void Window::processEvents() {
     }
 }
 
+// Méthode pour gérer les collisions
+void Window::handleCollisions() {
+    for (size_t i = 0; i < GameBoard::vehicles.size(); i++){
+        for (size_t j = i + 1; j < GameBoard::vehicles.size(); j++){
+            if (GameBoard::vehicles[i].intersects(GameBoard::vehicles[j])){
+                //todo: gestion de la collision entre GameBoard::vehicles[i] et GameBoard::vehicles[j]
+                //todo: empecher les objets de se superposer
+                GameBoard::vehicles[i].resolveCollision();
+                GameBoard::vehicles[j].resolveCollision();
+
+                std:: cout << " position de gameobject : "<< std::endl;
+                //todo: ajuste la position des objets pour éviter la collision
+                std::cout << "Collision detected!" << std::endl;
+            }
+        }
+    }
+}
+
 // Méthode principale pour exécuter la boucle de la fenêtre
 void Window::run() {
     sf::Clock clock; // Création d'une horloge pour mesurer le temps
 
     while (window.isOpen()) {
+        handleCollisions(); // Gestion des collisions
         processEvents(); // Gestion des événements
 
         float deltaTime = clock.restart().asSeconds(); // Mesure du temps écoulé

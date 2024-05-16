@@ -31,6 +31,7 @@ private:
     GameLogic* board;
     void initGameObjects();
     void processEvents(); //* Méthode pour gérer les événements
+    void handleCollisions(); //* Méthode pour gérer les collisions  
 };
 
 #endif // WINDOW_HPP
