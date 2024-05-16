@@ -28,8 +28,9 @@ private:
 
     // Méthode pour initialiser les objets
 
-    void initGameObjects();
+    void initGameObjects(); //* Méthode pour initialiser les objets
     void processEvents(); //* Méthode pour gérer les événements
+    void handleCollisions(); //* Méthode pour gérer les collisions  
 };
 
 #endif // WINDOW_HPP
