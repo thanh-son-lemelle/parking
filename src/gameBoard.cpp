@@ -3,31 +3,22 @@
 #include <sstream>
 #include <windows.h>
 
+std::vector<Vehicle> GameBoard::vehicles;
 GameBoard::GameBoard() 
-: board(6, std::vector<char>(6, '0')), vehicleX(nullptr) {}
+: vehicleX(nullptr) {}
 
 void GameBoard::addVehicle(char id, int x, int y, int length, Orientation orientation)
 {
+    std::cout << "Adding vehicle " << id << " at (" << x << ", " << y << ") with length " << length << " and orientation " << (orientation == HORIZONTAL ? "HORIZONTAL" : "VERTICAL") << std::endl;
     Vehicle newVehicle;
     if (orientation == HORIZONTAL)
     {
-        newVehicle = Vehicle(x, y, length, 1,id, orientation, id == 'X');
+        newVehicle = Vehicle(x *100, y*100, length*100, 100,id, orientation, id == 'X');
     }
     else {
-        newVehicle = Vehicle(x, y, 1, length,id, orientation, id == 'X');
+        newVehicle = Vehicle(x*100, y*100, 100, length*100,id, orientation, id == 'X');
     }
     vehicles.push_back(newVehicle);
-    for (int i = 0; i < length; ++i)
-    {
-        if (orientation == HORIZONTAL)
-        {
-            board[y][x + i] = id;
-        }
-        else
-        {
-            board[y + i][x] = id;
-        }
-    }
     if (id == 'X')
     {
         vehicleX = &vehicles.back();

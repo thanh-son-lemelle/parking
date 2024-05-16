@@ -88,8 +88,8 @@ Window::Window(const std::string& title, int width, int height)
     int startY = (height - gridRows * cellSize) / 2;
 
     grid = new Grid(gridRows, gridCols, cellSize, startX, startY);
-    // board = new GameLogic(std::string("../../levels/level1.txt"));
-    initGameObjects();
+    board = new GameLogic(std::string("../../levels/level1.txt"));
+    // initGameObjects();
 }
 
 // Destructeur de la classe Window
@@ -98,6 +98,7 @@ Window::~Window() {
     for (auto obj : gameObjects) {
         delete obj;
     }
+    delete board;
 }
 // Méthode pour initialiser les objets
 void Window::initGameObjects() {
@@ -123,10 +124,12 @@ void Window::processEvents() {
                 float mouseY =  static_cast<float>(event.mouseButton.y);
                 selectedObject = nullptr;
 
-                for (auto obj : gameObjects) {
-                    auto vehicule = dynamic_cast<Vehicle*>(obj);
-                    if (vehicule && vehicule->contains(mouseX, mouseY)){
-                        selectedObject = vehicule;
+                for (auto &obj : GameBoard::vehicles)
+                {
+                    Vehicle *vehicle = &obj;
+                    if (vehicle->contains(mouseX, mouseY))
+                    {
+                        selectedObject = vehicle;
                         break;
                     }
                 }
@@ -147,20 +150,20 @@ void Window::run() {
         float deltaTime = clock.restart().asSeconds(); // Mesure du temps écoulé
 
         // Mise à jour des objets
-        for (auto obj : gameObjects) {
-            obj->update(deltaTime); // Mise à jour de chaque objet
-        }
+        // for (auto obj : gameObjects) {
+        //     obj->update(deltaTime); // Mise à jour de chaque objet
+        // }
 
         window.clear(sf::Color::Black);
 
         // Dessiner ici
 
         grid->draw(window);
-        // board->draw(window);
-        for (auto obj : gameObjects)
-        {
-            obj->draw(window);
-        }
+        board->draw(window);
+        // for (auto obj : gameObjects)
+        // {
+        //     obj->draw(window);
+        // }
 
         window.display();
     }

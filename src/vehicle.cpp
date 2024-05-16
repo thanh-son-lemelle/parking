@@ -7,7 +7,7 @@ Vehicle::Vehicle()
     : GameObject(0, 0, 0, 0), isPlayer(false), shape(sf::Vector2f(0, 0)) {}
 
 Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientation orientation, bool isPlayer)
-    : GameObject(x * 100, y * 100, width * 100, height * 100), isPlayer(isPlayer), id(id), orientation(orientation), shape(sf::Vector2f(width * 100, height * 100))
+    : GameObject(x, y , width, height), isPlayer(isPlayer), id(id), orientation(orientation), shape(sf::Vector2f(width, height))
 {
     shape.setPosition(x, y); // Définit la position de la forme
     if (isPlayer) {
