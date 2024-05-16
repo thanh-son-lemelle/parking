@@ -10,6 +10,7 @@ private:
 public:
     GameLogic(const std::string levelFile);
     void draw(sf::RenderWindow &window);
+    void update(float deltaTime);
 };
 
 #endif // GAMELOGIC_HPP

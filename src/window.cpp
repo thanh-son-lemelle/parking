@@ -171,12 +171,7 @@ void Window::run() {
 
         float deltaTime = clock.restart().asSeconds(); // Mesure du temps écoulé
 
-        for (auto &obj : GameBoard::vehicles)
-        {
-            Vehicle *vehicle = &obj;
-            vehicle->update(deltaTime);
-        }
-
+        board->update(deltaTime);
         window.clear(sf::Color::Black);
 
         // Dessiner ici

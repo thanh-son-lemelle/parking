@@ -9,3 +9,8 @@ void GameLogic::draw(sf::RenderWindow &window)
 {
     board.draw(window);
 }
+
+void GameLogic::update(float deltaTime)
+{
+    board.update(deltaTime);
+}

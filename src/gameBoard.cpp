@@ -21,7 +21,7 @@ void GameBoard::addVehicle(char id, int x, int y, int length, Orientation orient
     vehicles.push_back(newVehicle);
     if (id == 'X')
     {
-        vehicleX = &vehicles.back();
+        vehicleXIndex = vehicles.size() - 1;
     }
 }
 
@@ -47,10 +47,7 @@ void GameBoard::loadFromFile(const std::string &filename)
         addVehicle(id, x, y, lenght, orientation);
     }
     file.close();
-    for (Vehicle &vehicle : vehicles)
-    {
-        std::cout << vehicle.id << std::endl;
-    }
+    vehicleX = &vehicles[vehicleXIndex];
 }
 
 void GameBoard::draw(sf::RenderWindow &window)
@@ -60,4 +57,33 @@ void GameBoard::draw(sf::RenderWindow &window)
     {
         vehicle.draw(window);
     }
+}
+
+void GameBoard::update(float deltaTime)
+{
+    for (Vehicle &vehicle : vehicles)
+    {
+        vehicle.update(deltaTime);
+    }
+    if(checkWin())
+    {
+        std::cout << "You win!" << std::endl;
+    }
+}
+
+bool GameBoard::checkWin()
+{
+    if (vehicleX == nullptr)
+    {
+        return false;
+    }
+    if (vehicleX->orientation == HORIZONTAL && vehicleX->getX() >= 500)
+    {
+        return true;
+    }
+    else if (vehicleX->orientation == VERTICAL && vehicleX->getY() == 500)
+    {
+        return true;
+    }
+    return false;
 }

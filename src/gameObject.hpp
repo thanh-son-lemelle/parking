@@ -37,7 +37,11 @@ public:
         this->prevX = this->x;
         this->prevY = this->y;
     }
-    
+    virtual float getX() = 0;     // Getter pour la coordonnée x
+    virtual float getY() = 0;    // Getter pour la coordonnée y
+    virtual float getWidth() = 0;  // Getter pour width
+    virtual float getHeight() = 0; // Getter pour height
+
 protected:
     float x, y;       // Coordonnées de l'objet
     float width, height; // Taille de l'objet

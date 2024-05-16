@@ -75,4 +75,20 @@ void Vehicle::update(float deltaTime) {
 void Vehicle::setIsSelect() {
     isSelect = !isSelect;
 }
-    
+
+float Vehicle::getX() {
+    return this->x;
+}
+
+float Vehicle::getY() {
+    return this->y;
+}
+
+float Vehicle::getWidth() {
+    return this->width;
+}
+
+float Vehicle::getHeight() {
+    return this->height;
+}
+

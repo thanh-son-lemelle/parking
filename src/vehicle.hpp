@@ -86,6 +86,12 @@ public:
     char id;
     Orientation orientation;
 
+    float getX() override;
+    float getY() override;
+    float getWidth() override;
+    float getHeight() override;
+
+
 private:
     bool isPlayer; // Booléen pour savoir si l'objet est le joueur
     float speed; // Vitesse de déplacement
