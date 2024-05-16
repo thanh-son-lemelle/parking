@@ -134,6 +134,20 @@ void Window::processEvents() {
     }
 }
 
+// Méthode pour gérer les collisions
+void Window::handleCollisions() {
+    for (size_t i = 0; i < gameObjects.size(); i++){
+        for (size_t j = i + 1; j < gameObjects.size(); j++){
+            if (gameObjects[i]->intersects(*gameObjects[j])){
+                //todo: gestion de la collision entre gameobjects[i] et gameobjects[j]
+                //todo: empescher les objets de se superposer
+                //todo: ajuste la position des objets pour éviter la collision
+                std::cout << "Collision detected!" << std::endl;
+            }
+        }
+    }
+}
+
 // Méthode principale pour exécuter la boucle de la fenêtre
 void Window::run() {
     sf::Clock clock; // Création d'une horloge pour mesurer le temps
@@ -147,6 +161,8 @@ void Window::run() {
         for (auto obj : gameObjects) {
             obj->update(deltaTime); // Mise à jour de chaque objet
         }
+
+        handleCollisions(); // Gestion des collisions
 
         window.clear(sf::Color::Black);
 
