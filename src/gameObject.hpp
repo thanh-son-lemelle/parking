@@ -17,6 +17,14 @@ public:
     virtual void draw(sf::RenderWindow& window) = 0; // Méthode pour dessiner l'objet
     virtual void update(float deltaTime) = 0;       // Méthode pour mettre à jour l'objet
 
+
+    // Méthode pour verifier les collisions
+
+    virtual bool intersects (const GameObject& other) const {
+        return !(x + width <= other.x || other.x + other.width <= x || 
+                 y + height <= other.y || other.y + other.height <= y);
+    }
+
 protected:
     float x, y;       // Coordonnées de l'objet
     float width, height; // Taille de l'objet
