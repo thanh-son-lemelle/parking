@@ -104,7 +104,7 @@ void Window::initGameObjects() {
     Orientation orientation1 = HORIZONTAL;
     Orientation orientation2 = VERTICAL;
     // Créer un player
-    Vehicle* player = new Vehicle(1, 1, 1, 2,'X',HORIZONTAL, true);
+    Vehicle* player = new Vehicle(1, 1, 2, 1,'X',HORIZONTAL, true);
     gameObjects.push_back(player);
 
     // Créer un enemy
@@ -157,6 +157,10 @@ void Window::run() {
 
         grid->draw(window);
         // board->draw(window);
+        for (auto obj : gameObjects)
+        {
+            obj->draw(window);
+        }
 
         window.display();
     }
