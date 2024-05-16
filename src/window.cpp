@@ -140,7 +140,9 @@ void Window::handleCollisions() {
         for (size_t j = i + 1; j < gameObjects.size(); j++){
             if (gameObjects[i]->intersects(*gameObjects[j])){
                 //todo: gestion de la collision entre gameobjects[i] et gameobjects[j]
-                //todo: empescher les objets de se superposer
+                //todo: empecher les objets de se superposer
+                gameObjects[i]->resolveCollision(*gameObjects[j]);
+                gameObjects[j]->resolveCollision(*gameObjects[i]);
                 //todo: ajuste la position des objets pour éviter la collision
                 std::cout << "Collision detected!" << std::endl;
             }
