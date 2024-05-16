@@ -25,7 +25,7 @@ private:
     sf::RenderWindow window; // Objet fenêtre de SFML
     Grid* grid;              // Pointeur vers un objet Grid
     std::vector<GameObject*> gameObjects ; // Vecteur de pointeurs vers des objets Vehicule
-    Vehicule* selectedObject; // Pointeur vers l'objet Vehicule sélectionné
+    Vehicle* selectedObject; // Pointeur vers l'objet Vehicule sélectionné
 
     // Méthode pour initialiser les objets
     GameLogic* board;
