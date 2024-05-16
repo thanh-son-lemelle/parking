@@ -1,9 +1,9 @@
-#include "vehicule.hpp"
+#include "vehicle.hpp"
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 
-// Constructeur de la classe Vehicule
-Vehicule::Vehicule(float x, float y, float width, float height, bool isPlayer)
+// Constructeur de la classe Vehicle
+Vehicle::Vehicle(float x, float y, float width, float height, bool isPlayer)
     : GameObject(x, y, width, height), isPlayer(isPlayer), shape(sf::Vector2f(width, height)) {
     shape.setPosition(x, y); // Définit la position de la forme
     if (isPlayer) {
@@ -16,13 +16,13 @@ Vehicule::Vehicule(float x, float y, float width, float height, bool isPlayer)
 
 // Méthode pour dessiner l'objet
 
-void Vehicule::draw(sf::RenderWindow& window) {
+void Vehicle::draw(sf::RenderWindow& window) {
     window.draw(shape); // Dessine la forme
 }
 
 // Méthode pour gerer les entrées du clavier
 
-void Vehicule::handleInput(const sf::Event& event) {
+void Vehicle::handleInput(const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         savePosition(); // Sauvegarde la position précédente
         if (event.key.code == sf::Keyboard::Up) {
@@ -49,11 +49,11 @@ void Vehicule::handleInput(const sf::Event& event) {
 
 // Méthode pour verifier si le clic est dans la zone de l'objet
 
-bool Vehicule::contains(float mouseX, float mouseY) const {
+bool Vehicle::contains(float mouseX, float mouseY) const {
     return shape.getGlobalBounds().contains(mouseX, mouseY);
 }
 
 
-void Vehicule::update(float deltaTime) {
+void Vehicle::update(float deltaTime) {
     shape.setPosition(x, y); // Met à jour la position de la forme
 }

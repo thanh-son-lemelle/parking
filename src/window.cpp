@@ -101,11 +101,11 @@ Window::~Window() {
 // Méthode pour initialiser les objets
 void Window::initGameObjects() {
     // Créer un player
-    Vehicule* player = new Vehicule(100, 100, 200, 100, true);
+    Vehicle* player = new Vehicle(100, 100, 200, 100, true);
     gameObjects.push_back(player);
 
     // Créer un enemy
-        Vehicule* enemy = new Vehicule(400, 400, 100, 200, false);
+        Vehicle* enemy = new Vehicle(400, 400, 100, 200, false);
         gameObjects.push_back(enemy);
 }
 // Méthode pour gérer les événements
@@ -121,9 +121,9 @@ void Window::processEvents() {
                 selectedObject = nullptr;
 
                 for (auto obj : gameObjects) {
-                    auto vehicule = dynamic_cast<Vehicule*>(obj);
-                    if (vehicule && vehicule->contains(mouseX, mouseY)){
-                        selectedObject = vehicule;
+                    auto vehicle = dynamic_cast<Vehicle*>(obj);
+                    if (vehicle && vehicle->contains(mouseX, mouseY)){
+                        selectedObject = vehicle;
                         break;
                     }
                 }
