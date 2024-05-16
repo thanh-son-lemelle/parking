@@ -77,6 +77,8 @@ public:
 
     void handleInput(const sf::Event& event);
 
+    void setIsSelect();
+
     // Méthode pour vérifier si le click de la souris est à l'intérieur de l'objet
 
     bool contains(float mouseX, float mouseY) const;
@@ -88,6 +90,7 @@ private:
     bool isPlayer; // Booléen pour savoir si l'objet est le joueur
     float speed; // Vitesse de déplacement
     sf::RectangleShape shape; // Forme de l'objet
+    bool isSelect;
 };
 
 #endif // VECHICULE_HPP

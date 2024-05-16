@@ -122,14 +122,17 @@ void Window::processEvents() {
             if (event.mouseButton.button == sf::Mouse::Left){
                 float mouseX =  static_cast<float>(event.mouseButton.x);
                 float mouseY =  static_cast<float>(event.mouseButton.y);
-                selectedObject = nullptr;
-
+                if (selectedObject){
+                    selectedObject->setIsSelect();
+                    selectedObject = nullptr;
+                }
                 for (auto &obj : GameBoard::vehicles)
                 {
                     Vehicle *vehicle = &obj;
                     if (vehicle->contains(mouseX, mouseY))
                     {
                         selectedObject = vehicle;
+                        selectedObject->setIsSelect();
                         break;
                     }
                 }
@@ -149,10 +152,11 @@ void Window::run() {
 
         float deltaTime = clock.restart().asSeconds(); // Mesure du temps écoulé
 
-        // Mise à jour des objets
-        // for (auto obj : gameObjects) {
-        //     obj->update(deltaTime); // Mise à jour de chaque objet
-        // }
+        for (auto &obj : GameBoard::vehicles)
+        {
+            Vehicle *vehicle = &obj;
+            vehicle->update(deltaTime);
+        }
 
         window.clear(sf::Color::Black);
 
@@ -160,10 +164,6 @@ void Window::run() {
 
         grid->draw(window);
         board->draw(window);
-        // for (auto obj : gameObjects)
-        // {
-        //     obj->draw(window);
-        // }
 
         window.display();
     }

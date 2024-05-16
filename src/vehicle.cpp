@@ -9,6 +9,7 @@ Vehicle::Vehicle()
 Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientation orientation, bool isPlayer)
     : GameObject(x, y , width, height), isPlayer(isPlayer), id(id), orientation(orientation), shape(sf::Vector2f(width, height))
 {
+    isSelect = false;  
     shape.setPosition(x, y); // Définit la position de la forme
     if (isPlayer) {
         shape.setFillColor(sf::Color::Green); // Définit la couleur de la forme
@@ -61,4 +62,17 @@ bool Vehicle::contains(float mouseX, float mouseY) const {
 
 
 void Vehicle::update(float deltaTime) {
+    if (isSelect)
+    {
+        shape.setOutlineThickness(5);
+        shape.setOutlineColor(sf::Color::Yellow);
+    }
+    else
+    {
+        shape.setOutlineThickness(0);
+    }
+}
+
+void Vehicle::setIsSelect() {
+    isSelect = !isSelect;
 }
