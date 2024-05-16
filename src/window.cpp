@@ -79,8 +79,8 @@ private:
 
 // Constructeur de la classe Window
 Window::Window(const std::string& title, int width, int height)
-    : window(sf::VideoMode(width, height), title) {
-    // calculer pour centrer la grille
+    : window(sf::VideoMode(width, height), title), selectedObject(nullptr) {
+    // calcule pour centrer la grille
     int gridRows = 6;
     int gridCols = 6;
     int cellSize = 100;
@@ -100,15 +100,13 @@ Window::~Window() {
 }
 // Méthode pour initialiser les objets
 void Window::initGameObjects() {
-    // Créer un joueur
+    // Créer un player
     Vehicule* player = new Vehicule(100, 100, 100, 200, true);
     gameObjects.push_back(player);
 
-    // Créer des ennemis
-    for (int i = 0; i < 6; i++) {
-        Vehicule* enemy = new Vehicule(i, 5, 1, 1, false);
+    // Créer un enemy
+        Vehicule* enemy = new Vehicule(400, 400, 100, 200, false);
         gameObjects.push_back(enemy);
-    }
 }
 // Méthode pour gérer les événements
 void Window::processEvents() {
@@ -116,13 +114,22 @@ void Window::processEvents() {
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed){
             window.close();
-        }
+        }else if (event.type == sf::Event::MouseButtonPressed){
+            if (event.mouseButton.button == sf::Mouse::Left){
+                float mouseX =  static_cast<float>(event.mouseButton.x);
+                float mouseY =  static_cast<float>(event.mouseButton.y);
+                selectedObject = nullptr;
 
-        for (auto obj : gameObjects) {
-            auto vehicule = dynamic_cast<Vehicule*>(obj);
-            if (vehicule){
-                vehicule->handleInput(event);
+                for (auto obj : gameObjects) {
+                    auto vehicule = dynamic_cast<Vehicule*>(obj);
+                    if (vehicule && vehicule->contains(mouseX, mouseY)){
+                        selectedObject = vehicule;
+                        break;
+                    }
+                }
             }
+        }else if (selectedObject){
+            selectedObject->handleInput(event);
         }
     }
 }

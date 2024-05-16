@@ -23,7 +23,7 @@ void Vehicule::draw(sf::RenderWindow& window) {
 // Méthode pour gerer les entrées du clavier
 
 void Vehicule::handleInput(const sf::Event& event) {
-    if (isPlayer && event.type == sf::Event::KeyPressed) {
+    if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Up) {
                 std::cout << "Up key pressed" << std::endl;
                 // Déplace le personnage vers le haut une seule fois
@@ -44,6 +44,12 @@ void Vehicule::handleInput(const sf::Event& event) {
         shape.setPosition(x, y); // Met à jour la position de la forme
         std::cout << "x: " << x << ", y: " << y << std::endl; // Affiche les coordonnées
     }
+}
+
+// Méthode pour verifier si le clic est dans la zone de l'objet
+
+bool Vehicule::contains(float mouseX, float mouseY) const {
+    return shape.getGlobalBounds().contains(mouseX, mouseY);
 }
 
 
