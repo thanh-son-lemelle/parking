@@ -10,15 +10,13 @@ GameBoard::GameBoard()
 void GameBoard::addVehicle(char id, int x, int y, int length, Orientation orientation)
 {
     std::cout << "Adding vehicle " << id << " at (" << x << ", " << y << ") with length " << length << " and orientation " << (orientation == HORIZONTAL ? "HORIZONTAL" : "VERTICAL") << std::endl;
-    Vehicle newVehicle;
     if (orientation == HORIZONTAL)
     {
-        newVehicle = Vehicle(x *100, y*100, length*100, 100,id, orientation, id == 'X');
+        vehicles.emplace_back(x *100, y*100, length*100, 100,id, orientation, id == 'X');
     }
     else {
-        newVehicle = Vehicle(x*100, y*100, 100, length*100,id, orientation, id == 'X');
+        vehicles.emplace_back(x*100, y*100, 100, length*100,id, orientation, id == 'X');
     }
-    vehicles.push_back(newVehicle);
     if (id == 'X')
     {
         vehicleXIndex = vehicles.size() - 1;

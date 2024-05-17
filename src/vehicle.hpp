@@ -66,7 +66,7 @@ class Vehicle : public GameObject { // Hérite de GameObject
 public:
     // Constructeur de la classe Vehicule
     Vehicle(float x, float y, float width, float height, char id, Orientation orientation, bool isPlayer = false);
-    Vehicle();
+    // Vehicle();
     // Méthode pour dessiner l'objet
     void draw(sf::RenderWindow& window) override;
 
@@ -91,12 +91,16 @@ public:
     float getWidth() override;
     float getHeight() override;
 
+    void setTexture(const std::string &textureName, Orientation orientation);
 
 private:
     bool isPlayer; // Booléen pour savoir si l'objet est le joueur
     float speed; // Vitesse de déplacement
     sf::RectangleShape shape; // Forme de l'objet
     bool isSelect;
+
+    sf::Texture texture;
+    sf::Sprite sprite;
 };
 
 #endif // VECHICULE_HPP

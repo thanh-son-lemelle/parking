@@ -1,10 +1,11 @@
 #include "vehicle.hpp"
+#include "resourceManager.hpp"
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 
 // Constructeur de la classe Vehicule
-Vehicle::Vehicle()
-    : GameObject(0, 0, 0, 0), isPlayer(false), shape(sf::Vector2f(0, 0)) {}
+// Vehicle::Vehicle()
+//     : GameObject(0, 0, 0, 0), isPlayer(false), shape(sf::Vector2f(0, 0)) {}
 
 Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientation orientation, bool isPlayer)
     : GameObject(x, y , width, height), isPlayer(isPlayer), id(id), orientation(orientation), shape(sf::Vector2f(width, height))
@@ -13,16 +14,20 @@ Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientati
     shape.setPosition(x, y); // Définit la position de la forme
     if (isPlayer) {
         shape.setFillColor(sf::Color::Green); // Définit la couleur de la forme
+        setTexture(std::string("player"), orientation);
     } else {
         shape.setFillColor(sf::Color::Red); // Définit la couleur de la forme
+        setTexture(std::string("vehicle"),orientation);
     }
     shape.setPosition(x, y); // Met à jour la position de la forme
+    sprite.setPosition(x, y);
 }
 
 // Méthode pour dessiner l'objet
 
 void Vehicle::draw(sf::RenderWindow& window) {
-    window.draw(this->shape); // Dessine la forme
+    // window.draw(this->shape); // Dessine la forme
+    window.draw(this->sprite);
 }
 
 // Méthode pour gerer les entrées du clavier
@@ -60,6 +65,7 @@ bool Vehicle::contains(float mouseX, float mouseY) const {
 
 
 void Vehicle::update(float deltaTime) {
+    sprite.setPosition(x, y);
     shape.setPosition(x, y); // Met à jour la position de la forme
     if (isSelect)
     {
@@ -92,3 +98,25 @@ float Vehicle::getHeight() {
     return this->height;
 }
 
+void Vehicle::setTexture(const std::string &textureName, Orientation orientation)
+{
+    std::cout << "setTexture method called" << std::endl;
+    ResourceManager::printTextures();
+    std::cout << "Texture name: " << textureName << std::endl;
+    sprite.setTexture(ResourceManager::getTexture(textureName));
+    float scaleX, scaleY;
+    if (orientation == HORIZONTAL)
+    {
+        sprite.setOrigin(sprite.getTexture()->getSize().x / 2, sprite.getTexture()->getSize().y / 2);
+        sprite.setRotation(90);
+        sprite.setOrigin(0, 92);
+        scaleX = this->height / sprite.getTexture()->getSize().x;
+        scaleY = this->width / sprite.getTexture()->getSize().y;
+    }
+    else
+    {
+        scaleX = this->width / sprite.getTexture()->getSize().x;
+        scaleY = this->height / sprite.getTexture()->getSize().y;
+    }
+    sprite.setScale(scaleX, scaleY);
+}

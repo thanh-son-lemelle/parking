@@ -2,6 +2,7 @@
 #include <string>
 #include "grid.hpp"
 #include "window.hpp"
+#include "resourceManager.hpp"
 
 //! Classe Window avec pointeur
 /*
@@ -86,6 +87,7 @@ Window::Window(const std::string& title, int width, int height)
     int cellSize = 100;
     int startX = (width - gridCols * cellSize) / 2;
     int startY = (height - gridRows * cellSize) / 2;
+    ResourceManager::loadTextures();
 
     grid = new Grid(gridRows, gridCols, cellSize, startX, startY);
     board = new GameLogic(std::string("../../levels/level1.txt"));
@@ -164,7 +166,6 @@ void Window::handleCollisions() {
 // Méthode principale pour exécuter la boucle de la fenêtre
 void Window::run() {
     sf::Clock clock; // Création d'une horloge pour mesurer le temps
-
     while (window.isOpen()) {
         handleCollisions(); // Gestion des collisions
         processEvents(); // Gestion des événements
