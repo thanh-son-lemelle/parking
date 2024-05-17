@@ -30,17 +30,17 @@ void Vehicle::draw(sf::RenderWindow& window) {
 void Vehicle::handleInput(const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         savePosition(); // Sauvegarde la position précédente
-        if (event.key.code == sf::Keyboard::Up) {
+        if (event.key.code == sf::Keyboard::Up && orientation == VERTICAL) {
             std::cout << "Up key pressed" << std::endl;
             // Déplace le personnage vers le haut une seule fois
             y-= 100;
-        } else if (event.key.code == sf::Keyboard::Down) {
+        } else if (event.key.code == sf::Keyboard::Down && orientation == VERTICAL) {
             // Déplace le personnage vers le bas une seule fois
             y+= 100;
-        } else if (event.key.code == sf::Keyboard::Left) {
+        } else if (event.key.code == sf::Keyboard::Left && orientation == HORIZONTAL) {
             // Déplace le personnage vers la gauche une seule fois
             x-= 100;
-        } else if (event.key.code == sf::Keyboard::Right) {
+        } else if (event.key.code == sf::Keyboard::Right && orientation == HORIZONTAL) {
             // Déplace le personnage vers la droite une seule fois
             x+= 100;
         }
