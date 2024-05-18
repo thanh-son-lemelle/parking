@@ -11,12 +11,10 @@ Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientati
     : GameObject(x, y , width, height), isPlayer(isPlayer), id(id), orientation(orientation), shape(sf::Vector2f(width, height))
 {
     isSelect = false;  
-    shape.setPosition(x, y); // Définit la position de la forme
+    shape.setFillColor(sf::Color(0, 0, 0, 128));
     if (isPlayer) {
-        shape.setFillColor(sf::Color::Green); // Définit la couleur de la forme
         setTexture(std::string("player"), orientation);
     } else {
-        shape.setFillColor(sf::Color::Red); // Définit la couleur de la forme
         setTexture(std::string("vehicle"),orientation);
     }
     shape.setPosition(x, y); // Met à jour la position de la forme
@@ -26,7 +24,7 @@ Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientati
 // Méthode pour dessiner l'objet
 
 void Vehicle::draw(sf::RenderWindow& window) {
-    // window.draw(this->shape); // Dessine la forme
+    window.draw(this->shape); // Dessine la forme
     window.draw(this->sprite);
 }
 
@@ -69,7 +67,7 @@ void Vehicle::update(float deltaTime) {
     shape.setPosition(x, y); // Met à jour la position de la forme
     if (isSelect)
     {
-        shape.setOutlineThickness(5);
+        shape.setOutlineThickness(2);
         shape.setOutlineColor(sf::Color::Yellow);
     }
     else
