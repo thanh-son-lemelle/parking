@@ -15,7 +15,7 @@ add_executable(CMakeSFMLProject
     src/window.cpp
     src/gameLogic.cpp
     src/grid.cpp
-    src/vehicule.cpp
+    src/vehicle.cpp
 )
 
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
