@@ -76,7 +76,7 @@ void Vehicle::update(float deltaTime) {
     }
 }
 
-void Vehicle::setIsSelect() {
+void Vehicle::setIsSelect() { //! Set the object as selected 
     isSelect = !isSelect;
 }
 
@@ -94,6 +94,10 @@ float Vehicle::getWidth() {
 
 float Vehicle::getHeight() {
     return this->height;
+}
+
+bool Vehicle::getIsSelect() {
+    return this->isSelect;
 }
 
 void Vehicle::setTexture(const std::string &textureName, Orientation orientation)
