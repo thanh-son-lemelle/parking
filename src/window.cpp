@@ -90,30 +90,15 @@ Window::Window(const std::string& title, int width, int height)
     ResourceManager::loadTextures();
 
     grid = new Grid(gridRows, gridCols, cellSize, startX, startY);
-    board = new GameLogic(std::string("../../levels/level1.txt"));
-    // initGameObjects();
+    logic = new GameLogic(std::string("../../levels/level1.txt"));
 }
 
 // Destructeur de la classe Window
 Window::~Window() {
     delete grid;
-    for (auto obj : gameObjects) {
-        delete obj;
-    }
-    delete board;
+    delete logic;
 }
-// Méthode pour initialiser les objets
-void Window::initGameObjects() {
-    Orientation orientation1 = HORIZONTAL;
-    Orientation orientation2 = VERTICAL;
-    // Créer un player
-    Vehicle* player = new Vehicle(1, 1, 2, 1,'X',HORIZONTAL, true);
-    gameObjects.push_back(player);
 
-    // Créer un enemy
-        Vehicle* enemy = new Vehicle(4, 4, 1, 2,'A',VERTICAL, false);
-        gameObjects.push_back(enemy);
-}
 // Méthode pour gérer les événements
 void Window::processEvents() {
     sf::Event event;
@@ -172,13 +157,13 @@ void Window::run() {
 
         float deltaTime = clock.restart().asSeconds(); // Mesure du temps écoulé
 
-        board->update(deltaTime);
+        logic->update(deltaTime);
         window.clear(sf::Color::Black);
 
         // Dessiner ici
 
         grid->draw(window);
-        board->draw(window);
+        logic->draw(window);
 
         window.display();
     }
