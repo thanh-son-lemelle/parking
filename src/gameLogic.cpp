@@ -27,9 +27,14 @@ void GameLogic::handleCollisions()
             {
                 // todo: gestion de la collision entre GameBoard::vehicles[i] et GameBoard::vehicles[j]
                 // todo: empecher les objets de se superposer
-                GameBoard::vehicles[i].resolveCollision();
-                GameBoard::vehicles[j].resolveCollision();
-
+                if (GameBoard::vehicles[i].getIsSelect() == true)
+                {
+                    GameBoard::vehicles[i].resolveCollision();
+                } 
+                else if (GameBoard::vehicles[j].getIsSelect() == true)
+                {
+                    GameBoard::vehicles[j].resolveCollision();
+                }
                 std::cout << " position de gameobject : " << std::endl;
                 // todo: ajuste la position des objets pour éviter la collision
                 std::cout << "Collision detected!" << std::endl;
