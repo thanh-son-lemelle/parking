@@ -27,7 +27,6 @@ private:
     // Méthode pour initialiser les objets
     GameLogic *logic;
     void processEvents();    //* Méthode pour gérer les événements
-    void handleCollisions(); //* Méthode pour gérer les collisions
 };
 
 #endif // GAME_STATE_HPP
