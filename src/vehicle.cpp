@@ -99,7 +99,6 @@ float Vehicle::getHeight() {
 void Vehicle::setTexture(const std::string &textureName, Orientation orientation)
 {
     std::cout << "setTexture method called" << std::endl;
-    ResourceManager::printTextures();
     std::cout << "Texture name: " << textureName << std::endl;
     sprite.setTexture(ResourceManager::getTexture(textureName));
     float scaleX, scaleY;

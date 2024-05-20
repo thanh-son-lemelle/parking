@@ -21,6 +21,8 @@ add_executable(CMakeSFMLProject
     src/gameBOard.cpp
     src/resourceManager.cpp
     src/music.cpp
+    src/GameState.cpp
+    src/MenuState.cpp
 )
 
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
