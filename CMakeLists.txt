@@ -10,12 +10,19 @@ FetchContent_Declare(SFML
     GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
+cmake_policy(SET CMP0115 NEW)
+
 add_executable(CMakeSFMLProject
     src/main.cpp
     src/window.cpp
     src/gameLogic.cpp
     src/grid.cpp
     src/vehicle.cpp
+    src/gameBOard.cpp
+    src/resourceManager.cpp
+    src/music.cpp
+    src/GameState.cpp
+    src/MenuState.cpp
 )
 
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)

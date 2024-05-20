@@ -4,9 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
-
-#include "grid.hpp"
-#include "vehicle.hpp"
+#include "State.hpp"
 
 // Classe Window pour gérer la fenêtre SFML
 class Window {
@@ -19,18 +17,18 @@ public:
 
     // Méthode principale pour exécuter la boucle de la fenêtre
     void run();
+    void chageState(State * newState);
+
+    // Méthode pour obtenir les dimensions de la fenêtre
+    int getWidth() const { return window.getSize().x; }
+    int getHeight() const { return window.getSize().y; }
+
+    sf::RenderWindow &getWindow() { return window; }
 
 private:
     sf::RenderWindow window; // Objet fenêtre de SFML
-    Grid* grid;              // Pointeur vers un objet Grid
-    std::vector<GameObject*> gameObjects ; // Vecteur de pointeurs vers des objets Vehicle
-    Vehicle* selectedObject; // Pointeur vers l'objet Vehicle sélectionné
-
-    // Méthode pour initialiser les objets
-
-    void initGameObjects(); //* Méthode pour initialiser les objets
-    void processEvents(); //* Méthode pour gérer les événements
-    void handleCollisions(); //* Méthode pour gérer les collisions  
+      
+    State* currentState; 
 };
 
 #endif // WINDOW_HPP

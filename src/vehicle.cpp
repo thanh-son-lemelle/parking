@@ -1,23 +1,31 @@
 #include "vehicle.hpp"
+#include "resourceManager.hpp"
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 
-// Constructeur de la classe Vehicle
-Vehicle::Vehicle(float x, float y, float width, float height, bool isPlayer)
-    : GameObject(x, y, width, height), isPlayer(isPlayer), shape(sf::Vector2f(width, height)) {
-    shape.setPosition(x, y); // Définit la position de la forme
+// Constructeur de la classe Vehicule
+// Vehicle::Vehicle()
+//     : GameObject(0, 0, 0, 0), isPlayer(false), shape(sf::Vector2f(0, 0)) {}
+
+Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientation orientation, bool isPlayer)
+    : GameObject(x, y , width, height), isPlayer(isPlayer), id(id), orientation(orientation), shape(sf::Vector2f(width, height))
+{
+    isSelect = false;  
+    shape.setFillColor(sf::Color(0, 0, 0, 128));
     if (isPlayer) {
-        shape.setFillColor(sf::Color::Green); // Définit la couleur de la forme
+        setTexture(std::string("player"), orientation);
     } else {
-        shape.setFillColor(sf::Color::Red); // Définit la couleur de la forme
+        setTexture(std::string("vehicle"),orientation);
     }
     shape.setPosition(x, y); // Met à jour la position de la forme
+    sprite.setPosition(x, y);
 }
 
 // Méthode pour dessiner l'objet
 
 void Vehicle::draw(sf::RenderWindow& window) {
-    window.draw(shape); // Dessine la forme
+    window.draw(this->shape); // Dessine la forme
+    window.draw(this->sprite);
 }
 
 // Méthode pour gerer les entrées du clavier
@@ -25,17 +33,17 @@ void Vehicle::draw(sf::RenderWindow& window) {
 void Vehicle::handleInput(const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         savePosition(); // Sauvegarde la position précédente
-        if (event.key.code == sf::Keyboard::Up) {
+        if (event.key.code == sf::Keyboard::Up && orientation == VERTICAL) {
             std::cout << "Up key pressed" << std::endl;
             // Déplace le personnage vers le haut une seule fois
             y-= 100;
-        } else if (event.key.code == sf::Keyboard::Down) {
+        } else if (event.key.code == sf::Keyboard::Down && orientation == VERTICAL) {
             // Déplace le personnage vers le bas une seule fois
             y+= 100;
-        } else if (event.key.code == sf::Keyboard::Left) {
+        } else if (event.key.code == sf::Keyboard::Left && orientation == HORIZONTAL) {
             // Déplace le personnage vers la gauche une seule fois
             x-= 100;
-        } else if (event.key.code == sf::Keyboard::Right) {
+        } else if (event.key.code == sf::Keyboard::Right && orientation == HORIZONTAL) {
             // Déplace le personnage vers la droite une seule fois
             x+= 100;
         }
@@ -55,5 +63,57 @@ bool Vehicle::contains(float mouseX, float mouseY) const {
 
 
 void Vehicle::update(float deltaTime) {
+    sprite.setPosition(x, y);
     shape.setPosition(x, y); // Met à jour la position de la forme
+    if (isSelect)
+    {
+        shape.setOutlineThickness(2);
+        shape.setOutlineColor(sf::Color::Yellow);
+    }
+    else
+    {
+        shape.setOutlineThickness(0);
+    }
+}
+
+void Vehicle::setIsSelect() {
+    isSelect = !isSelect;
+}
+
+float Vehicle::getX() {
+    return this->x;
+}
+
+float Vehicle::getY() {
+    return this->y;
+}
+
+float Vehicle::getWidth() {
+    return this->width;
+}
+
+float Vehicle::getHeight() {
+    return this->height;
+}
+
+void Vehicle::setTexture(const std::string &textureName, Orientation orientation)
+{
+    std::cout << "setTexture method called" << std::endl;
+    std::cout << "Texture name: " << textureName << std::endl;
+    sprite.setTexture(ResourceManager::getTexture(textureName));
+    float scaleX, scaleY;
+    if (orientation == HORIZONTAL)
+    {
+        sprite.setOrigin(sprite.getTexture()->getSize().x / 2, sprite.getTexture()->getSize().y / 2);
+        sprite.setRotation(90);
+        sprite.setOrigin(0, 92);
+        scaleX = this->height / sprite.getTexture()->getSize().x;
+        scaleY = this->width / sprite.getTexture()->getSize().y;
+    }
+    else
+    {
+        scaleX = this->width / sprite.getTexture()->getSize().x;
+        scaleY = this->height / sprite.getTexture()->getSize().y;
+    }
+    sprite.setScale(scaleX, scaleY);
 }
