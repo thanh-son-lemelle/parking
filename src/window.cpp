@@ -82,7 +82,7 @@ private:
 Window::Window(const std::string& title, int width, int height)
     : window(sf::VideoMode(width, height), title) {
     ResourceManager::loadTextures();
-    currentState = new GameState(*this);
+    currentState = new MenuState(*this);
 }
 
 // Destructeur de la classe Window

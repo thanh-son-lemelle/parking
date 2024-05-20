@@ -11,12 +11,13 @@ class MenuState : public State
 public:
     MenuState(Window& windowClass); //* Constructeur de la classe MenuState
     void handleInput() override;
-
     void update(float dt) override;
-
     void draw() override;
+
 private:
     sf::RenderWindow &window;
+    sf::RectangleShape rectangle1;
+    sf::RectangleShape rectangle2;
 };
 
 #endif // MENU_STATE_HPP
