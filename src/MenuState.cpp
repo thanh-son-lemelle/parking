@@ -9,7 +9,8 @@
 MenuState::MenuState(Window &windowClass)
     : window(windowClass.getWindow()),
       rectangle1(sf::Vector2f(200.0f, 100.0f)), // Initialisation du premier rectangle
-      rectangle2(sf::Vector2f(200.0f, 100.0f))  // Initialisation du deuxième rectangle
+      rectangle2(sf::Vector2f(200.0f, 100.0f)),  // Initialisation du deuxième rectangle
+      windowClass(windowClass)
       
 {
     sprite.setTexture(ResourceManager::getTexture("background"));
@@ -87,7 +88,8 @@ void MenuState::handleInput()
             if (mousePositionFloat.x >= position1.x && mousePositionFloat.x <= position1.x + rectangleSize.x &&
                 mousePositionFloat.y >= position1.y && mousePositionFloat.y <= position1.y + rectangleSize.y)
             {
-                //WindowClass.chageState(GameState);
+                GameState *gameState = new GameState(windowClass, "../../levels/level1.txt");
+                windowClass.chageState(gameState);
             }
             // Vérifier si le clic est à l'intérieur de la zone du rectangle 2
             else if (mousePositionFloat.x >= position2.x && mousePositionFloat.x <= position2.x + rectangleSize.x &&

@@ -1,7 +1,7 @@
 #include "GameState.hpp"
 #include "Window.hpp"
 
-GameState::GameState(Window &windowClass)
+GameState::GameState(Window &windowClass, std::string levelPath)
     : window(windowClass.getWindow()), selectedObject(nullptr)
 {
     // calcule pour centrer la grille
@@ -12,7 +12,7 @@ GameState::GameState(Window &windowClass)
     int startY = (windowClass.getHeight() - gridRows * cellSize) / 2;
 
     grid = new Grid(gridRows, gridCols, cellSize, startX, startY);
-    logic = new GameLogic(std::string("../../levels/level1.txt"));
+    logic = new GameLogic(levelPath);
 }
 
 // Destructeur de la classe Window

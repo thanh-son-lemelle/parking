@@ -12,7 +12,7 @@ class Window;
 class GameState : public State
 {
 public:
-    GameState(Window& windowClass); //* Constructeur de la classe GameState
+    GameState(Window& windowClass, std::string levelPath); //* Constructeur de la classe GameState
     ~GameState();              //* Destructeur de la classe GameState
     void handleInput() override;
 

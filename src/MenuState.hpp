@@ -15,6 +15,7 @@ public:
     void draw() override;
 
 private:
+    Window &windowClass; // Référence vers un objet Window
     sf::RenderWindow &window;
     sf::RectangleShape rectangle1;
     sf::RectangleShape rectangle2;
