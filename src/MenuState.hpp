@@ -18,6 +18,7 @@ private:
     sf::RenderWindow &window;
     sf::RectangleShape rectangle1;
     sf::RectangleShape rectangle2;
+    sf::Sprite sprite;
 };
 
 #endif // MENU_STATE_HPP

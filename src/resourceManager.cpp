@@ -19,6 +19,15 @@ void ResourceManager::loadTextures()
     else {
         std::cout << "Textures loaded" << std::endl;
     }
+
+
+    if (!textures["background"].loadFromFile("../../assets/bg_menu.jpg"))
+    {
+        std::cerr << "Error loading menu texture" << std::endl;
+    }
+    else {
+        std::cout << "Textures loaded" << std::endl;
+    }
     
 }
 sf::Texture &ResourceManager::getTexture(const std::string &textureName)

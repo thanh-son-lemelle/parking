@@ -2,17 +2,25 @@
 #include "window.hpp"
 #include "GameState.hpp"
 #include <iostream> // Pour l'affichage de débogage
+#include "resourceManager.hpp"
+
 
 
 MenuState::MenuState(Window &windowClass)
     : window(windowClass.getWindow()),
       rectangle1(sf::Vector2f(200.0f, 100.0f)), // Initialisation du premier rectangle
       rectangle2(sf::Vector2f(200.0f, 100.0f))  // Initialisation du deuxième rectangle
+      
 {
+    sprite.setTexture(ResourceManager::getTexture("background"));
+    sprite.setScale(800,600);
+    
 }
 void MenuState::draw()
 {
     window.clear(sf::Color::Magenta);
+    
+    window.draw(this->sprite);
 
     // Taille des rectangles (deux fois plus grands)
     sf::Vector2f rectangleSize(200.0f, 100.0f);
@@ -78,7 +86,7 @@ void MenuState::handleInput()
             if (mousePositionFloat.x >= position1.x && mousePositionFloat.x <= position1.x + rectangleSize.x &&
                 mousePositionFloat.y >= position1.y && mousePositionFloat.y <= position1.y + rectangleSize.y)
             {
-                WindowClass.chageState(GameState);
+                //WindowClass.chageState(GameState);
             }
             // Vérifier si le clic est à l'intérieur de la zone du rectangle 2
             else if (mousePositionFloat.x >= position2.x && mousePositionFloat.x <= position2.x + rectangleSize.x &&
