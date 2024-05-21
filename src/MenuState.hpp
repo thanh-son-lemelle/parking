@@ -19,6 +19,8 @@ private:
     sf::RectangleShape rectangle1;
     sf::RectangleShape rectangle2;
     sf::Sprite sprite;
+    sf::Sprite spriteExitButton;
+    sf::Sprite spriteLevel1Button;
 };
 
 #endif // MENU_STATE_HPP

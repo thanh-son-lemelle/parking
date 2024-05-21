@@ -13,15 +13,20 @@ MenuState::MenuState(Window &windowClass)
       
 {
     sprite.setTexture(ResourceManager::getTexture("background"));
+    spriteExitButton.setTexture(ResourceManager::getTexture("buttonExit"));
+    spriteLevel1Button.setTexture(ResourceManager::getTexture("level1_button"));
     float scaleX = 800.0f / sprite.getTexture()->getSize().x;
     float scaleY = 600.0f / sprite.getTexture()->getSize().y;
     sprite.setScale(scaleX, scaleY);
+    spriteExitButton.setPosition(300,360);
+    spriteLevel1Button.setPosition(300,140);
 }
 void MenuState::draw()
 {
     window.clear(sf::Color::Magenta);
     
     window.draw(this->sprite);
+    
 
     // Taille des rectangles (deux fois plus grands)
     sf::Vector2f rectangleSize(200.0f, 100.0f);
@@ -48,7 +53,8 @@ void MenuState::draw()
     // Dessiner les rectangles
     window.draw(rectangle1);
     window.draw(rectangle2);
-
+    window.draw(this->spriteExitButton);
+    window.draw(this->spriteLevel1Button);
     window.display();
 }
 
