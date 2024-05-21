@@ -6,27 +6,27 @@
 #include <vector>
 #include "State.hpp"
 
-// Classe Window pour gérer la fenêtre SFML
+// Window class to manage the SFML window
 class Window {
 public:
-    // Constructeur de la classe Window
+    // Constructor of the Window class
     Window(const std::string& title, int width, int height);
 
-    // Destructeur de la classe Window
+    // Destructor of the Window class
     ~Window();
 
-    // Méthode principale pour exécuter la boucle de la fenêtre
+    // Main method to run the window loop
     void run();
-    void chageState(State * newState);
+    void changeState(State * newState);
 
-    // Méthode pour obtenir les dimensions de la fenêtre
+    // Method to get the dimensions of the window
     int getWidth() const { return window.getSize().x; }
     int getHeight() const { return window.getSize().y; }
 
     sf::RenderWindow &getWindow() { return window; }
 
 private:
-    sf::RenderWindow window; // Objet fenêtre de SFML
+    sf::RenderWindow window; // SFML window object
       
     State* currentState; 
 };

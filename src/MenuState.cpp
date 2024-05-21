@@ -1,16 +1,13 @@
 #include "MenuState.hpp"
 #include "window.hpp"
 #include "GameState.hpp"
-#include <iostream> // Pour l'affichage de débogage
+#include <iostream> // For debug display
 #include "resourceManager.hpp"
-
-
 
 MenuState::MenuState(Window &windowClass)
     : window(windowClass.getWindow()),
-      rectangle1(sf::Vector2f(200.0f, 100.0f)), // Initialisation du premier rectangle
-      rectangle2(sf::Vector2f(200.0f, 100.0f))  // Initialisation du deuxième rectangle
-      
+      rectangle1(sf::Vector2f(200.0f, 100.0f)), // Initializing the first rectangle
+      rectangle2(sf::Vector2f(200.0f, 100.0f))  // Initializing the second rectangle
 {
     sprite.setTexture(ResourceManager::getTexture("background"));
     spriteExitButton.setTexture(ResourceManager::getTexture("buttonExit"));
@@ -21,36 +18,36 @@ MenuState::MenuState(Window &windowClass)
     spriteExitButton.setPosition(300,360);
     spriteLevel1Button.setPosition(300,140);
 }
+
 void MenuState::draw()
 {
     window.clear(sf::Color::Magenta);
-    
-    window.draw(this->sprite);
-    
 
-    // Taille des rectangles (deux fois plus grands)
+    window.draw(this->sprite);
+
+    // Size of the rectangles (twice as big)
     sf::Vector2f rectangleSize(200.0f, 100.0f);
 
-    // Créer deux rectangles avec la même taille
+    // Create two rectangles with the same size
     sf::RectangleShape rectangle1(rectangleSize);
     sf::RectangleShape rectangle2(rectangleSize);
 
-    // Obtenir la taille de la fenêtre
+    // Get the window size
     sf::Vector2u windowSize = window.getSize();
 
-    // Calculer les positions pour centrer les rectangles
+    // Calculate positions to center the rectangles
     sf::Vector2f position1((windowSize.x - rectangleSize.x) / 2.0f, (windowSize.y - rectangleSize.y) / 2.0f - 110.0f);
     sf::Vector2f position2((windowSize.x - rectangleSize.x) / 2.0f, (windowSize.y - rectangleSize.y) / 2.0f + 110.0f);
 
-    // Positionner les rectangles
+    // Position the rectangles
     rectangle1.setPosition(position1);
     rectangle2.setPosition(position2);
 
-    // Définir la couleur des rectangles à bleu
+    // Set the color of the rectangles to blue
     rectangle1.setFillColor(sf::Color::Blue);
     rectangle2.setFillColor(sf::Color::Blue);
 
-    // Dessiner les rectangles
+    // Draw the rectangles
     window.draw(rectangle1);
     window.draw(rectangle2);
     window.draw(this->spriteExitButton);
@@ -73,29 +70,29 @@ void MenuState::handleInput()
         }
         else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
         {
-            // Obtenir les coordonnées de la souris par rapport à la fenêtre
+            // Get the mouse coordinates relative to the window
             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-            // Convertir les coordonnées de la souris en coordonnées de type float
+            // Convert mouse coordinates to float coordinates
             sf::Vector2f mousePositionFloat(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
 
-            // Taille des rectangles
+            // Size of the rectangles
             sf::Vector2f rectangleSize(200.0f, 100.0f);
 
-            // Obtenir la taille de la fenêtre
+            // Get the window size
             sf::Vector2u windowSize = window.getSize();
 
-            // Calculer les positions des rectangles
+            // Calculate rectangle positions
             sf::Vector2f position1((windowSize.x - rectangleSize.x) / 2.0f, (windowSize.y - rectangleSize.y) / 2.0f - 110.0f);
             sf::Vector2f position2((windowSize.x - rectangleSize.x) / 2.0f, (windowSize.y - rectangleSize.y) / 2.0f + 110.0f);
 
-            // Vérifier si le clic est à l'intérieur de la zone du rectangle 1
+            // Check if click is inside rectangle 1 area
             if (mousePositionFloat.x >= position1.x && mousePositionFloat.x <= position1.x + rectangleSize.x &&
                 mousePositionFloat.y >= position1.y && mousePositionFloat.y <= position1.y + rectangleSize.y)
             {
                 //WindowClass.chageState(GameState);
             }
-            // Vérifier si le clic est à l'intérieur de la zone du rectangle 2
+            // Check if click is inside rectangle 2 area
             else if (mousePositionFloat.x >= position2.x && mousePositionFloat.x <= position2.x + rectangleSize.x &&
                      mousePositionFloat.y >= position2.y && mousePositionFloat.y <= position2.y + rectangleSize.y)
             {

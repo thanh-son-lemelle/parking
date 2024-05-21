@@ -6,7 +6,7 @@
 class GameLogic {
 private:
     GameBoard board;
-    void handleCollisions(); //* Méthode pour gérer les collisions
+    void handleCollisions(); //* Method to handle collisions
 
 public:
     GameLogic(const std::string levelFile);

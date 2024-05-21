@@ -3,10 +3,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 
-// Constructeur de la classe Vehicule
-// Vehicle::Vehicle()
-//     : GameObject(0, 0, 0, 0), isPlayer(false), shape(sf::Vector2f(0, 0)) {}
-
+// Constructor of the Vehicle class
 Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientation orientation, bool isPlayer)
     : GameObject(x, y , width, height), isPlayer(isPlayer), id(id), orientation(orientation), shape(sf::Vector2f(width, height))
 {
@@ -23,56 +20,53 @@ Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientati
         {
             setTexture(std::string("bus"), orientation);
         }
-        
     }
-    shape.setPosition(x, y); // Met à jour la position de la forme
+    shape.setPosition(x, y); // Update the shape's position
     sprite.setPosition(x, y);
 }
 
-// Méthode pour dessiner l'objet
+// Method to draw the object
 
 void Vehicle::draw(sf::RenderWindow& window) {
-    window.draw(this->shape); // Dessine la forme
+    window.draw(this->shape); // Draw the shape
     window.draw(this->sprite);
 }
 
-// Méthode pour gerer les entrées du clavier
+// Method to handle keyboard input
 
 void Vehicle::handleInput(const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
-        savePosition(); // Sauvegarde la position précédente
+        savePosition(); // Save the previous position
         if (event.key.code == sf::Keyboard::Up && orientation == VERTICAL) {
             std::cout << "Up key pressed" << std::endl;
-            // Déplace le personnage vers le haut une seule fois
-            y-= 100;
+            // Move the character up once
+            y -= 100;
         } else if (event.key.code == sf::Keyboard::Down && orientation == VERTICAL) {
-            // Déplace le personnage vers le bas une seule fois
-            y+= 100;
+            // Move the character down once
+            y += 100;
         } else if (event.key.code == sf::Keyboard::Left && orientation == HORIZONTAL) {
-            // Déplace le personnage vers la gauche une seule fois
-            x-= 100;
+            // Move the character left once
+            x -= 100;
         } else if (event.key.code == sf::Keyboard::Right && orientation == HORIZONTAL) {
-            // Déplace le personnage vers la droite une seule fois
-            x+= 100;
+            // Move the character right once
+            x += 100;
         }
         
-        x = std::max(100.0f, std::min(x, 700.0f - width)); // Limite les déplacements horizontaux
-        y = std::max(0.0f, std::min(y, 600.0f - height)); // Limite les déplacements verticaux
-        std::cout << "x: " << x << ", y: " << y << ", prevX : "<< prevX << ", prevY : " << prevY << std::endl; // Affiche les coordonnées
-        
+        x = std::max(100.0f, std::min(x, 700.0f - width)); // Limit horizontal movements
+        y = std::max(0.0f, std::min(y, 600.0f - height)); // Limit vertical movements
+        std::cout << "x: " << x << ", y: " << y << ", prevX : "<< prevX << ", prevY : " << prevY << std::endl; // Display coordinates
     }
 }
 
-// Méthode pour verifier si le clic est dans la zone de l'objet
+// Method to check if the click is within the object's area
 
 bool Vehicle::contains(float mouseX, float mouseY) const {
     return shape.getGlobalBounds().contains(mouseX, mouseY);
 }
 
-
 void Vehicle::update(float deltaTime) {
     sprite.setPosition(x, y);
-    shape.setPosition(x, y); // Met à jour la position de la forme
+    shape.setPosition(x, y); // Update the shape's position
     if (isSelect)
     {
         shape.setOutlineThickness(2);

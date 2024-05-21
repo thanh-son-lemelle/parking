@@ -9,7 +9,7 @@ class Window;
 class MenuState : public State
 {
 public:
-    MenuState(Window& windowClass); //* Constructeur de la classe MenuState
+    MenuState(Window& windowClass); //* Constructor for the MenuState class
     void handleInput() override;
     void update(float dt) override;
     void draw() override;
