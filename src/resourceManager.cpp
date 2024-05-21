@@ -19,6 +19,14 @@ void ResourceManager::loadTextures()
     else {
         std::cout << "Textures loaded" << std::endl;
     }
+
+    if (!textures["bus"].loadFromFile("../../assets/bus.png"))
+    {
+        std::cerr << "Error loading bus texture" << std::endl;
+    }
+    else {
+        std::cout << "Textures loaded" << std::endl;
+    }
     
 }
 sf::Texture &ResourceManager::getTexture(const std::string &textureName)
