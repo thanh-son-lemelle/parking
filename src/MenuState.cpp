@@ -13,8 +13,9 @@ MenuState::MenuState(Window &windowClass)
       
 {
     sprite.setTexture(ResourceManager::getTexture("background"));
-    sprite.setScale(800,600);
-    
+    float scaleX = 800.0f / sprite.getTexture()->getSize().x;
+    float scaleY = 600.0f / sprite.getTexture()->getSize().y;
+    sprite.setScale(scaleX, scaleY);
 }
 void MenuState::draw()
 {
