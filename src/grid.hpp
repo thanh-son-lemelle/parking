@@ -3,21 +3,21 @@
 
 #include <SFML/Graphics.hpp>
 
-// Classe Grid pour dessiner une grille
+// Grid class for drawing a grid
 class Grid {
 public:
-    // Constructeur de la classe Grid
+    // Constructor for the Grid class
     Grid(int rows, int cols, int cellSize, int startX, int startY);
 
-    // Méthode pour dessiner la grille dans la fenêtre SFML
+    // Method to draw the grid in the SFML window
     void draw(sf::RenderWindow& window);
 
 private:
-    int rows;       // Nombre de lignes de la grille
-    int cols;       // Nombre de colonnes de la grille
-    int cellSize;   // Taille d'une cellule de la grille
-    int startX;     // Position de départ en x
-    int startY;     // Position de départ en y
+    int rows;       // Number of rows in the grid
+    int cols;       // Number of columns in the grid
+    int cellSize;   // Size of a grid cell
+    int startX;     // Starting x position
+    int startY;     // Starting y position
 };
 
 #endif // GRID_HPP

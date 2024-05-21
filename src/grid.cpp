@@ -1,24 +1,24 @@
 #include "grid.hpp"
 
-// Constructeur de la classe Grid
+// Constructor for the Grid class
 Grid::Grid(int rows, int cols, int cellSize, int startX, int startY)
-    : rows(rows), cols(cols), cellSize(cellSize), startX(startX), startY(startY){
-    // Initialisation de la grille avec les lignes et les colonnes spécifiées
+    : rows(rows), cols(cols), cellSize(cellSize), startX(startX), startY(startY) {
+    // Initialize the grid with the specified rows and columns
 }
 
-// Méthode pour dessiner la grille dans la fenêtre SFML
+// Method to draw the grid in the SFML window
 void Grid::draw(sf::RenderWindow& window) {
     sf::RectangleShape line;
     line.setFillColor(sf::Color::White);
 
-    // Dessiner les lignes horizontales
+    // Draw horizontal lines
     for (int i = 0; i <= rows; ++i) {
         line.setSize(sf::Vector2f(cols * cellSize, 1));
         line.setPosition(startX, i * cellSize + startY);
         window.draw(line);
     }
 
-    // Dessiner les lignes verticales
+    // Draw vertical lines
     for (int i = 0; i <= cols; ++i) {
         line.setSize(sf::Vector2f(1, rows * cellSize));
         line.setPosition(startX + i * cellSize, startY);

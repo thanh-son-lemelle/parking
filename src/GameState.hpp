@@ -12,24 +12,25 @@ class Window;
 class GameState : public State
 {
 public:
-    GameState(Window& windowClass, std::string levelPath); //* Constructeur de la classe GameState
-    ~GameState();              //* Destructeur de la classe GameState
+    GameState(Window& windowClass); //* Constructor for the GameState class
+    ~GameState();                   //* Destructor for the GameState class
     void handleInput() override;
 
     void update(float dt) override;
 
     void draw() override;
+    
 private:
-    Window& windowClass;     // Référence vers un objet Window
-    sf::RenderWindow& window; // Référence vers un objet Window
-    Grid *grid;              // Pointeur vers un objet Grid
-    Vehicle *selectedObject; // Pointeur vers l'objet Vehicule sélectionné
+    Window &windowClass;
+    sf::RenderWindow& window; // Reference to a Window object
+    Grid *grid;               // Pointer to a Grid object
+    Vehicle *selectedObject;  // Pointer to the selected Vehicle object
 
-    // Méthode pour initialiser les objets
-    GameLogic *logic;
-    void processEvents();    //* Méthode pour gérer les événements
+    GameLogic *logic;         // Pointer to a GameLogic object
+    void processEvents();     // Method to handle events
+
     void verifyWin();
-    void resetVehicles();        //* Méthode pour vérifier si le joueur a gagné
+    void resetVehicles();
 };
 
 #endif // GAME_STATE_HPP

@@ -36,6 +36,24 @@ void ResourceManager::loadTextures()
     else {
         std::cout << "Textures loaded" << std::endl;
     }
+
+
+    if (!textures["buttonExit"].loadFromFile("../../assets/button1.png"))
+    {
+        std::cerr << "Error loading buttonExit texture" << std::endl;
+    }
+    else {
+        std::cout << "Textures loaded" << std::endl;
+    }
+
+
+    if (!textures["level1_button"].loadFromFile("../../assets/level1_button.png"))
+    {
+        std::cerr << "Error loading level1_button texture" << std::endl;
+    }
+    else {
+        std::cout << "Textures loaded" << std::endl;
+    }
     
 }
 sf::Texture &ResourceManager::getTexture(const std::string &textureName)
