@@ -15,7 +15,15 @@ Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientati
     if (isPlayer) {
         setTexture(std::string("player"), orientation);
     } else {
-        setTexture(std::string("vehicle"),orientation);
+        if (orientation == HORIZONTAL && width == 200 || orientation == VERTICAL && height == 200)
+        {
+            setTexture(std::string("vehicle"), orientation);
+        }
+        else if (orientation == HORIZONTAL && width == 300 || orientation == VERTICAL && height == 300)
+        {
+            setTexture(std::string("bus"), orientation);
+        }
+        
     }
     shape.setPosition(x, y); // Met à jour la position de la forme
     sprite.setPosition(x, y);
@@ -76,7 +84,7 @@ void Vehicle::update(float deltaTime) {
     }
 }
 
-void Vehicle::setIsSelect() {
+void Vehicle::setIsSelect() { //! Set the object as selected 
     isSelect = !isSelect;
 }
 
@@ -96,10 +104,12 @@ float Vehicle::getHeight() {
     return this->height;
 }
 
+bool Vehicle::getIsSelect() {
+    return this->isSelect;
+}
+
 void Vehicle::setTexture(const std::string &textureName, Orientation orientation)
 {
-    std::cout << "setTexture method called" << std::endl;
-    std::cout << "Texture name: " << textureName << std::endl;
     sprite.setTexture(ResourceManager::getTexture(textureName));
     float scaleX, scaleY;
     if (orientation == HORIZONTAL)

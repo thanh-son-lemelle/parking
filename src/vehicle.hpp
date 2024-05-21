@@ -86,6 +86,8 @@ public:
     char id;
     Orientation orientation;
 
+    bool getIsSelect();
+
     float getX() override;
     float getY() override;
     float getWidth() override;

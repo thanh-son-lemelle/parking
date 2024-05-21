@@ -20,10 +20,16 @@ void ResourceManager::loadTextures()
         std::cout << "Textures loaded" << std::endl;
     }
 
+<<<<<<< HEAD
 
     if (!textures["background"].loadFromFile("../../assets/bg_menu.jpg"))
     {
         std::cerr << "Error loading menu texture" << std::endl;
+=======
+    if (!textures["bus"].loadFromFile("../../assets/bus.png"))
+    {
+        std::cerr << "Error loading bus texture" << std::endl;
+>>>>>>> test
     }
     else {
         std::cout << "Textures loaded" << std::endl;
