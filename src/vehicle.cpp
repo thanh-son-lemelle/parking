@@ -29,6 +29,10 @@ Vehicle::Vehicle(float x, float y, float width, float height, char id, Orientati
     sprite.setPosition(x, y);
 }
 
+Vehicle::~Vehicle() {
+    std::cout << "Vehicle destroyed" << std::endl;
+}
+
 // Méthode pour dessiner l'objet
 
 void Vehicle::draw(sf::RenderWindow& window) {

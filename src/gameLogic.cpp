@@ -5,6 +5,13 @@ GameLogic::GameLogic(const std::string levelFile)
 {
     board.loadFromFile(levelFile);
 }
+
+GameLogic::~GameLogic()
+{
+    board.~GameBoard();
+    delete &board;
+
+}
 void GameLogic::draw(sf::RenderWindow &window)
 {
     board.draw(window);
@@ -14,6 +21,7 @@ void GameLogic::update(float deltaTime)
 {
     handleCollisions();
     board.update(deltaTime);
+    verifyWin();
 }
 
 // Méthode pour gérer les collisions
@@ -41,4 +49,18 @@ void GameLogic::handleCollisions()
             }
         }
     }
+}
+
+void GameLogic::verifyWin()
+{
+    if (board.getIsWin())
+    {
+        isWin = true;
+
+    }
+}
+
+bool GameLogic::getIsWin() const
+{
+    return isWin;
 }

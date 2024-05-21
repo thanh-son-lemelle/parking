@@ -5,7 +5,13 @@
 
 std::vector<Vehicle> GameBoard::vehicles;
 GameBoard::GameBoard() 
-: vehicleX(nullptr) {}
+: vehicleX(nullptr), isWin(false){}
+
+GameBoard::~GameBoard()
+{
+    vehicles.clear();
+    delete vehicleX;
+}
 
 void GameBoard::addVehicle(char id, int x, int y, int length, Orientation orientation)
 {
@@ -65,7 +71,7 @@ void GameBoard::update(float deltaTime)
     }
     if(checkWin())
     {
-        std::cout << "You win!" << std::endl;
+        isWin = true;
     }
 }
 
@@ -84,4 +90,9 @@ bool GameBoard::checkWin()
         return true;
     }
     return false;
+}
+
+bool GameBoard::getIsWin() const
+{
+    return isWin;
 }

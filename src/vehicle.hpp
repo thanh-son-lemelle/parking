@@ -66,7 +66,7 @@ class Vehicle : public GameObject { // Hérite de GameObject
 public:
     // Constructeur de la classe Vehicule
     Vehicle(float x, float y, float width, float height, char id, Orientation orientation, bool isPlayer = false);
-    // Vehicle();
+    ~Vehicle();
     // Méthode pour dessiner l'objet
     void draw(sf::RenderWindow& window) override;
 

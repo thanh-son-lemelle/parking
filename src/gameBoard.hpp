@@ -9,21 +9,22 @@
 class GameBoard
 {
 private:
-    
-
-public:
+    bool isWin;
+    bool checkWin();
     Vehicle *vehicleX;
     int vehicleXIndex;
+
+public:
     GameBoard();
+    ~GameBoard();
     void addVehicle(char id, int x, int y, int length, Orientation orientation);
-    bool moveVehicle(char id, int dx, int dy);
-    bool isVictory() const;
     void printBoard() const;
     void loadFromFile(const std::string &filename);
     void draw(sf::RenderWindow &window);
     static std::vector<Vehicle> vehicles;
     void update(float deltaTime);
-    bool checkWin();
+    bool getIsWin() const;
+
 };
 
 #endif // GAMEBOARD_H

@@ -1,8 +1,9 @@
 #include "GameState.hpp"
-#include "Window.hpp"
+#include "MenuState.hpp"
+#include "window.hpp"
 
 GameState::GameState(Window &windowClass, std::string levelPath)
-    : window(windowClass.getWindow()), selectedObject(nullptr)
+    : window(windowClass.getWindow()), selectedObject(nullptr), windowClass(windowClass)
 {
     // calcule pour centrer la grille
     int gridRows = 6;
@@ -69,6 +70,7 @@ void GameState::handleInput()
 void GameState::update(float dt)
 {
     logic->update(dt);
+    verifyWin();
 }
 
 void GameState::draw()
@@ -77,4 +79,21 @@ void GameState::draw()
     grid->draw(window);
     logic->draw(window);
     window.display();
+}
+
+void GameState::verifyWin()
+{
+    if (logic->getIsWin())
+    {
+        std::cout << "You win!" << std::endl;
+        resetVehicles();
+        MenuState *menuState = new MenuState(windowClass);
+        windowClass.chageState(menuState);
+
+    }
+}
+
+void GameState::resetVehicles()
+{
+    GameBoard::vehicles.clear();
 }

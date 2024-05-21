@@ -20,6 +20,7 @@ public:
 
     void draw() override;
 private:
+    Window& windowClass;     // Référence vers un objet Window
     sf::RenderWindow& window; // Référence vers un objet Window
     Grid *grid;              // Pointeur vers un objet Grid
     Vehicle *selectedObject; // Pointeur vers l'objet Vehicule sélectionné
@@ -27,6 +28,8 @@ private:
     // Méthode pour initialiser les objets
     GameLogic *logic;
     void processEvents();    //* Méthode pour gérer les événements
+    void verifyWin();
+    void resetVehicles();        //* Méthode pour vérifier si le joueur a gagné
 };
 
 #endif // GAME_STATE_HPP
