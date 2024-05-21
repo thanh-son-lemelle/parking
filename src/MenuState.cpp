@@ -93,7 +93,7 @@ void MenuState::handleInput()
                 mousePositionFloat.y >= position1.y && mousePositionFloat.y <= position1.y + rectangleSize.y)
             {
                 GameState *gameState = new GameState(windowClass, "../../levels/level1.txt");
-                windowClass.chageState(gameState);
+                windowClass.changeState(gameState);
             }
             // Check if click is inside rectangle 2 area
             else if (mousePositionFloat.x >= position2.x && mousePositionFloat.x <= position2.x + rectangleSize.x &&

@@ -88,7 +88,7 @@ void GameState::verifyWin()
         std::cout << "You win!" << std::endl;
         resetVehicles();
         MenuState *menuState = new MenuState(windowClass);
-        windowClass.chageState(menuState);
+        windowClass.changeState(menuState);
 
     }
 }
